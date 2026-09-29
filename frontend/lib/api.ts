@@ -74,3 +74,15 @@ export const api = {
     ),
 };
 
+// Named Export Aliases for Clean Imports across UI Components
+export const fetchGraph = api.graph;
+export const fetchQuestions = api.questions;
+export const fetchAttempts = api.listAttempts;
+export const recordAttempt = api.postAttempt;
+export const fetchTrace = api.trace;
+export const fetchLesson = api.lesson;
+export const startRepairSession = api.startRepair;
+export const fetchRepairSession = api.getRepair;
+export const submitRepairResult = api.submitRepair;
+export const fetchHeatmap = api.teacherHeatmap;
+export const fetchConceptPatterns = api.teacherConceptPatterns;
