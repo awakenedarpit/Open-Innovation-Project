@@ -43,7 +43,7 @@ app = FastAPI(title="Concept X-Ray", version="0.4.0")
 # Allow the Next.js dev server (port 3000) to call the API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=[\n        "http://localhost:3000",\n        "http://127.0.0.1:3000",\n        "https://open-innovation-project-web.onrender.com",\n    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
