@@ -40,7 +40,7 @@ from .trace import compute_trace
 
 app = FastAPI(title="Concept X-Ray", version="0.4.0")
 
-# Allow the Next.js dev server (port 3000) to call the API
+# Allow only the deployed frontend and local development clients.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -49,9 +49,23 @@ app.add_middleware(
         "https://open-innovation-project-web.onrender.com",
     ],
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
 )
+
+
+@app.middleware("http")
+async def add_security_headers(request, call_next):
+    response = await call_next(request)
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'none'; frame-ancestors 'none'; base-uri 'none'"
+    )
+    return response
 
 
 def get_store() -> InMemoryStore:
@@ -371,4 +385,3 @@ def health(s: InMemoryStore = Depends(get_store)) -> JSONResponse:
         "edges": len(s.edges),
         "attempts": len(s.attempts),
     })
-
