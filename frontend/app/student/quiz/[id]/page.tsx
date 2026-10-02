@@ -13,7 +13,7 @@ import type { Question, QuestionOption } from "@/lib/types";
 export default function QuizPage() {
   const params = useParams();
   const router = useRouter();
-  const qid = (params?.id as string) || "q_ptr_01";
+  const qid = (params?.id as string) || "q.alg.factoring.01";
 
   const [question, setQuestion] = useState<Question | null>(null);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
