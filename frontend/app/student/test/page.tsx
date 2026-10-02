@@ -22,8 +22,9 @@ export default function TestPage() {
   }, []);
 
   const testQuestions = useMemo(() => {
+    const shuffled = [...questions].sort(() => Math.random() - 0.5);
     const seen = new Set<string>();
-    return questions.filter((q) => {
+    return shuffled.filter((q) => {
       if (seen.has(q.target_concept_id)) return false;
       seen.add(q.target_concept_id);
       return true;
