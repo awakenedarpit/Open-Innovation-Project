@@ -20,6 +20,7 @@ export default function QuizPage() {
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<"correct" | "incorrect" | null>(null);
 
   const learnerId = getLearnerId();
 
@@ -48,13 +49,11 @@ export default function QuizPage() {
         outcome: isCorrect ? "correct" : "incorrect",
       });
 
+      setResult(isCorrect ? "correct" : "incorrect");
       if (!isCorrect) {
-        // Redirect to X-Ray Diagnosis animation screen!
-        router.push(`/student/trace/${question.id}`);
+        window.setTimeout(() => router.push(`/student/trace/${question.id}`), 700);
       } else {
-        // Correct answer view
-        alert("Correct! You mastered this diagnostic question.");
-        router.push("/student/dashboard");
+        window.setTimeout(() => router.push("/student/dashboard"), 1200);
       }
     } catch (err: any) {
       setError(err.message || "Failed to record attempt");
@@ -162,6 +161,12 @@ export default function QuizPage() {
           {error && (
             <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700">
               {error}
+            </div>
+          )}
+
+          {result && (
+            <div className={`p-4 rounded-xl border text-sm font-semibold ${result === "correct" ? "bg-emerald-50 border-emerald-200 text-emerald-800" : "bg-amber-50 border-amber-200 text-amber-800"}`}>
+              {result === "correct" ? "Correct! Your answer was recorded. Returning to your dashboard…" : "Answer recorded. Opening Concept X-Ray to trace the underlying gap…"}
             </div>
           )}
 
