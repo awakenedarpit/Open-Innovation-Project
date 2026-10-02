@@ -33,8 +33,10 @@ export default function MicroLessonPage() {
         setLesson(lessonData);
         const found = graphData.concepts.find((c) => c.id === conceptId);
         setConcept(found || null);
-        const first = questions.find((q) => q.target_concept_id === conceptId);
-        if (first) setQuizQuestionId(first.id);
+        const matching = questions.filter((q) => q.target_concept_id === conceptId);
+        if (matching.length) {
+          setQuizQuestionId(matching[Math.floor(Math.random() * matching.length)].id);
+        }
       })
       .catch((err) => console.error("Lesson error:", err))
       .finally(() => setLoading(false));
@@ -65,7 +67,7 @@ export default function MicroLessonPage() {
               Targeted Micro-Lesson
             </span>
             <span className="text-xs font-mono text-navy-500">
-              Source: {lesson?.source || "static_fallback"}
+              Source: {lesson?.source === "static_fallback" ? "Reviewed curriculum fallback" : (lesson?.source || "Reviewed curriculum")}
             </span>
           </div>
 
@@ -88,7 +90,7 @@ export default function MicroLessonPage() {
               Why This Matters
             </h3>
             <p className="text-xs text-brand-900 leading-relaxed">
-              Without mastering <strong className="font-semibold">{concept?.title || conceptId}</strong>, calculating offsets in dynamic arrays or custom data structures will consistently produce memory access errors or subtle bugs.
+              Building confidence in <strong className="font-semibold">{concept?.title || conceptId}</strong> helps you apply the idea correctly in the next concepts of the prerequisite graph.
             </p>
           </div>
 
@@ -121,7 +123,9 @@ export default function MicroLessonPage() {
               Common Misconception
             </h3>
             <p className="text-xs text-rose-900 leading-relaxed">
-              Students often assume adding `1` to a pointer increases its memory address by 1 byte. In reality, pointer arithmetic scales the offset by `sizeof(T)`—adding 1 to an `int*` advances the address by 4 bytes.
+              {conceptId === "alg.factoring"
+                ? "A common mistake is choosing factors that multiply to the constant term but do not add to the middle coefficient. Both conditions must be satisfied."
+                : "A common mistake is applying a memorized rule without checking it against the definition. Use the worked example to verify each step before moving on."}
             </p>
           </div>
 
