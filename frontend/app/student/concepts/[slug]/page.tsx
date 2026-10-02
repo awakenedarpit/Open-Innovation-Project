@@ -7,8 +7,8 @@ import { Navbar } from "@/components/Navbar";
 import { Sidebar } from "@/components/Sidebar";
 import { Footer } from "@/components/Footer";
 import { ArrowLeft, BookOpen, CheckCircle2, AlertTriangle, Play, GitCommit, Layers, ArrowRight } from "lucide-react";
-import { fetchGraph, fetchLesson } from "@/lib/api";
-import type { Concept, PrerequisiteEdge, Lesson } from "@/lib/types";
+import { fetchGraph, fetchLesson, fetchQuestions } from "@/lib/api";
+import type { Concept, PrerequisiteEdge, Lesson, Question } from "@/lib/types";
 
 export default function ConceptDetailPage() {
   const params = useParams();
@@ -16,18 +16,18 @@ export default function ConceptDetailPage() {
 
   const [concept, setConcept] = useState<Concept | null>(null);
   const [edges, setEdges] = useState<PrerequisiteEdge[]>([]);
-  const [lesson, setLesson] = useState<Lesson | null>(null);
+  const [lesson, setLesson] = useState<Lesson | null>(null);\n  const [question, setQuestion] = useState<Question | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!slug) return;
     
-    Promise.all([fetchGraph(), fetchLesson(slug)])
-      .then(([graphData, lessonData]) => {
+    Promise.all([fetchGraph(), fetchLesson(slug), fetchQuestions()])
+      .then(([graphData, lessonData, questions]) => {
         const found = graphData.concepts.find((c) => c.id === slug);
         setConcept(found || null);
         setEdges(graphData.edges);
-        setLesson(lessonData);
+        setLesson(lessonData);\n        setQuestion(questions.find((q) => q.target_concept_id === slug) || null);
       })
       .catch((err) => console.error("Error loading concept details:", err))
       .finally(() => setLoading(false));
@@ -105,7 +105,7 @@ export default function ConceptDetailPage() {
                 Study Micro-Lesson
               </Link>
               <Link
-                href={`/student/quiz/q_ptr_01`}
+                href={question ? `/student/quiz/${question.id}` : `/student/dashboard`}
                 className="inline-flex items-center justify-center px-5 py-2.5 text-xs font-semibold text-navy-800 bg-navy-100 hover:bg-navy-200 rounded-xl transition-colors"
               >
                 <Play className="w-4 h-4 mr-2 text-navy-700" />
