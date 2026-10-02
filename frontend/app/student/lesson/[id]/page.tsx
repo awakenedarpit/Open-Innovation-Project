@@ -24,14 +24,17 @@ export default function MicroLessonPage() {
 
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [concept, setConcept] = useState<Concept | null>(null);
-  const [loading, setLoading] = useState(true);\n  const [quizQuestionId, setQuizQuestionId] = useState<string>("q.alg.factoring.01");
+  const [loading, setLoading] = useState(true);
+  const [quizQuestionId, setQuizQuestionId] = useState<string>("q.alg.factoring.01");
 
   useEffect(() => {
     Promise.all([fetchLesson(conceptId), fetchGraph(), fetchQuestions()])
       .then(([lessonData, graphData, questions]) => {
         setLesson(lessonData);
         const found = graphData.concepts.find((c) => c.id === conceptId);
-        setConcept(found || null);\n        const first = questions.find((q) => q.target_concept_id === conceptId);\n        if (first) setQuizQuestionId(first.id);
+        setConcept(found || null);
+        const first = questions.find((q) => q.target_concept_id === conceptId);
+        if (first) setQuizQuestionId(first.id);
       })
       .catch((err) => console.error("Lesson error:", err))
       .finally(() => setLoading(false));
@@ -134,7 +137,7 @@ export default function MicroLessonPage() {
           </div>
 
           <Link
-            href={`/student/quiz/q.alg.factoring.01`}
+            href={`/student/quiz/${quizQuestionId}`}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-xs font-bold text-navy-950 bg-brand-400 hover:bg-brand-300 rounded-xl transition-all shadow-md shrink-0"
           >
             <Play className="w-4 h-4 fill-navy-950" />
