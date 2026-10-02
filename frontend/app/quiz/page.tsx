@@ -11,7 +11,7 @@ import { DEMO_SCRIPT } from "@/lib/demo";
 import type { Question } from "@/lib/types";
 
 // The curated three-question script.
-const SCRIPT = [DEMO_SCRIPT.warmup, DEMO_SCRIPT.prereqMiss, DEMO_SCRIPT.target];
+const SCRIPT = [DEMO_SCRIPT.target];
 
 export default function QuizPage() {
   const router = useRouter();
