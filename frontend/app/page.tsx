@@ -156,7 +156,7 @@ export default function LandingPage() {
                   <div className="pt-2 flex items-center justify-between text-xs">
                     <span className="text-navy-500 font-medium">Recommended Action:</span>
                     <Link
-                      href="/student/quiz/q_ptr_01"
+                      href="/student/quiz/q.alg.factoring.01"
                       className="text-brand-600 hover:text-brand-700 font-semibold flex items-center gap-1"
                     >
                       <span>Launch Micro-Lesson</span>
