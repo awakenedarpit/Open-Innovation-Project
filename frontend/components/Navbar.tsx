@@ -82,7 +82,7 @@ export function Navbar() {
             {isDashboard ? (
               <div className="flex items-center gap-3 bg-navy-50 px-3 py-1.5 rounded-full border border-navy-200 text-xs text-navy-700">
                 <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
-                <span>Active Session</span>
+                <span>Demo Mode</span>
                 <span className="text-navy-300">|</span>
                 <Link
                   href={isTeacherView ? "/student/dashboard" : "/teacher/dashboard"}
