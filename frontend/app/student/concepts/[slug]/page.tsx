@@ -16,7 +16,8 @@ export default function ConceptDetailPage() {
 
   const [concept, setConcept] = useState<Concept | null>(null);
   const [edges, setEdges] = useState<PrerequisiteEdge[]>([]);
-  const [lesson, setLesson] = useState<Lesson | null>(null);\n  const [question, setQuestion] = useState<Question | null>(null);
+  const [lesson, setLesson] = useState<Lesson | null>(null);
+  const [question, setQuestion] = useState<Question | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,7 +28,8 @@ export default function ConceptDetailPage() {
         const found = graphData.concepts.find((c) => c.id === slug);
         setConcept(found || null);
         setEdges(graphData.edges);
-        setLesson(lessonData);\n        setQuestion(questions.find((q) => q.target_concept_id === slug) || null);
+        setLesson(lessonData);
+        setQuestion(questions.find((q) => q.target_concept_id === slug) || null);
       })
       .catch((err) => console.error("Error loading concept details:", err))
       .finally(() => setLoading(false));
