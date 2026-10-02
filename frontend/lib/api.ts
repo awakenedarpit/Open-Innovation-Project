@@ -12,14 +12,20 @@ export class ApiError extends Error {
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let res: Response;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
   try {
     res = await fetch(`${API_BASE}${path}`, {
       ...init,
       cache: "no-store",
+      signal: init?.signal ?? controller.signal,
       headers: { "content-type": "application/json", ...(init?.headers ?? {}) },
     });
-  } catch (e) {
+  } catch (e: any) {
+    if (e?.name === "AbortError") throw new ApiError(408, "The API took too long to respond. Please try again.");
     throw new ApiError(0, `Cannot reach API at ${API_BASE} — is the FastAPI server running?`);
+  } finally {
+    clearTimeout(timeout);
   }
   if (!res.ok) {
     const body = await res.text().catch(() => "");
