@@ -76,7 +76,7 @@ export default function StudentDashboard() {
 
             <div className="relative z-10 shrink-0">
               <Link
-                href="/student/quiz/q_ptr_01"
+                href="/student/quiz/q.alg.factoring.01"
                 className="inline-flex items-center justify-center px-5 py-3 text-sm font-semibold text-navy-950 bg-brand-400 hover:bg-brand-300 rounded-xl transition-all shadow-md group"
               >
                 <Play className="w-4 h-4 mr-2 text-navy-950 fill-navy-950" />
@@ -117,7 +117,7 @@ export default function StudentDashboard() {
                 <AlertTriangle className="w-4 h-4 text-amber-500" />
               </div>
               <div className="text-2xl font-bold text-amber-600">2 Concepts</div>
-              <p className="text-[11px] text-amber-700 font-medium">Pointer Arithmetic, Dynamic Memory</p>
+              <p className="text-[11px] text-amber-700 font-medium">Factoring Trinomials, Dynamic Memory</p>
             </div>
 
             {/* Current Streak */}
@@ -159,7 +159,7 @@ export default function StudentDashboard() {
                     </div>
                   </div>
                   <Link
-                    href="/student/lesson/pointer_arithmetic"
+                    href="/student/lesson/alg.factoring"
                     className="inline-flex items-center gap-1 text-xs font-bold text-white bg-navy-900 hover:bg-navy-800 px-4 py-2 rounded-xl shrink-0 transition-colors"
                   >
                     <span>Continue</span>
@@ -170,7 +170,7 @@ export default function StudentDashboard() {
                 <div className="bg-white border border-navy-200 rounded-2xl p-5 shadow-subtle flex items-center justify-between gap-4 hover:border-brand-300 transition-all">
                   <div className="space-y-1.5 min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-navy-900 truncate">Dynamic Memory Allocation</span>
+                      <span className="text-xs font-bold text-navy-900 truncate">Quadratic Equations</span>
                       <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px] font-semibold border border-slate-200">
                         45% Mastery
                       </span>
@@ -180,7 +180,7 @@ export default function StudentDashboard() {
                     </div>
                   </div>
                   <Link
-                    href="/student/lesson/dynamic_memory"
+                    href="/student/lesson/alg.quadratic_eq"
                     className="inline-flex items-center gap-1 text-xs font-bold text-white bg-navy-900 hover:bg-navy-800 px-4 py-2 rounded-xl shrink-0 transition-colors"
                   >
                     <span>Continue</span>
@@ -225,7 +225,7 @@ export default function StudentDashboard() {
               </div>
 
               <Link
-                href="/student/trace/q_ptr_01"
+                href="/student/trace/q.alg.factoring.01"
                 className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-navy-900 hover:bg-navy-800 text-white rounded-xl text-xs font-semibold transition-colors"
               >
                 <span>Understand This Concept</span>
